@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prospectos — Pintura Residencial & Comercial · Palm Beach County 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+:root{--void:#0A0A0A;--surface:#111111;--border:#2A2A2A;--white:#FFFFFF;--gray1:#888888;--gray2:#555555;--violet:#A855F7;--purple:#7C3AED;--lilac:#C084FC;--green:#4ade80;--yellow:#fbbf24}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--void);color:var(--white);font-family:'Space Grotesk',sans-serif;line-height:1.6}
+a{color:var(--violet);text-decoration:none}a:hover{color:var(--lilac)}
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:28px 40px}
+.header-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:20px}
+.btn-pdf{display:inline-flex;align-items:center;gap:8px;background:var(--violet);color:var(--white);font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;padding:10px 22px;border-radius:6px;border:none;cursor:pointer;transition:background .2s}
+.btn-pdf:hover{background:var(--purple)}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.pill{background:#1A1A1A;border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:11px;color:var(--gray1);font-family:'DM Mono',monospace}
+.pill span{color:var(--violet)}
+.report-title{font-size:22px;font-weight:700;letter-spacing:-.01em;margin-bottom:4px}
+.report-sub{color:var(--gray1);font-size:14px}
+.stats-bar{display:grid;grid-template-columns:repeat(5,1fr);background:var(--void);border-bottom:1px solid var(--border)}
+.stat-cell{padding:20px 28px;border-right:1px solid var(--border)}
+.stat-cell:last-child{border-right:none}
+.stat-num{font-family:'DM Mono',monospace;font-size:36px;font-weight:500;color:var(--violet);line-height:1}
+.stat-lbl{font-size:11px;color:var(--gray2);text-transform:uppercase;letter-spacing:.12em;margin-top:4px}
+.content{max-width:1400px;margin:0 auto;padding:40px}
+.section{margin-bottom:56px}
+.section-title{font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:.15em;color:var(--violet);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.table-wrap{overflow-x:auto;border-radius:8px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead tr{background:var(--surface)}
+th{padding:11px 12px;text-align:left;color:var(--gray1);font-weight:500;font-size:10px;text-transform:uppercase;letter-spacing:.1em;white-space:nowrap;border-bottom:1px solid var(--border)}
+td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle;color:var(--white)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:rgba(168,85,247,.04)}
+.mono{font-family:'DM Mono',monospace;font-size:11px;color:var(--gray1)}
+.co-name{font-weight:600;font-size:13px}
+.co-web{font-family:'DM Mono',monospace;font-size:10px;color:var(--gray2)}
+.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;font-family:'DM Mono',monospace;letter-spacing:.04em;white-space:nowrap}
+.b-alta{background:rgba(168,85,247,.15);color:var(--lilac);border:1px solid rgba(168,85,247,.3)}
+.b-media{background:rgba(250,204,21,.1);color:var(--yellow);border:1px solid rgba(250,204,21,.25)}
+.b-baja{background:rgba(107,114,128,.15);color:var(--gray1);border:1px solid rgba(107,114,128,.3)}
+.b-tipo{background:#161616;color:var(--gray1);border:1px solid var(--border)}
+.score-v{font-family:'DM Mono',monospace;font-size:17px;font-weight:500;color:var(--violet)}
+.score-m{font-family:'DM Mono',monospace;font-size:17px;font-weight:500;color:var(--gray1)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.card-bar{height:3px;background:linear-gradient(90deg,var(--purple),var(--violet),var(--lilac))}
+.card-bar-b{height:3px;background:linear-gradient(90deg,#3b82f6,#60a5fa)}
+.card-head{padding:20px 20px 0;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.card-name{font-size:15px;font-weight:700;letter-spacing:-.01em}
+.card-city{font-size:11px;color:var(--gray1);margin-top:3px;font-family:'DM Mono',monospace}
+.card-score-num{font-family:'DM Mono',monospace;font-size:38px;font-weight:500;color:var(--violet);line-height:1}
+.card-score-num-b{font-family:'DM Mono',monospace;font-size:38px;font-weight:500;color:#60a5fa;line-height:1}
+.card-score-lbl{font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:.1em;text-align:right}
+.card-body{padding:16px 20px 20px}
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:13px}
+.cg-k{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray2);margin-bottom:2px}
+.cg-v{font-size:12px;font-family:'DM Mono',monospace;color:var(--white);word-break:break-all}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+.tag{font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--gray1);font-family:'DM Mono',monospace}
+.tag-g{background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.2);color:var(--green)}
+.tag-y{background:rgba(250,204,21,.08);border-color:rgba(250,204,21,.2);color:var(--yellow)}
+.opp-box{background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.18);border-radius:6px;padding:11px 13px;font-size:12.5px;color:#d8b4fe;margin-bottom:14px;line-height:1.6}
+.opp-box strong{color:var(--white)}
+.opp-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--gray2);font-weight:600;margin-bottom:6px}
+.msg-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--gray2);font-weight:600;margin-bottom:6px}
+.msg-box{background:var(--void);border:1px solid var(--border);border-radius:6px;padding:12px;font-size:12px;line-height:1.7;color:#aaa;position:relative;white-space:pre-wrap}
+.copy-btn{position:absolute;top:8px;right:8px;background:rgba(168,85,247,.15);color:var(--violet);border:1px solid rgba(168,85,247,.25);border-radius:4px;padding:3px 10px;font-size:10px;font-family:'DM Mono',monospace;cursor:pointer;transition:background .15s}
+.copy-btn:hover{background:rgba(168,85,247,.3)}
+.strat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.strat-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px}
+.strat-num{font-family:'DM Mono',monospace;font-size:24px;color:var(--violet);font-weight:500;margin-bottom:8px}
+.strat-card h4{font-size:13px;font-weight:700;margin-bottom:8px}
+.strat-card p{font-size:12.5px;color:var(--gray1);line-height:1.6}
+.json-wrap{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.json-toolbar{padding:10px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.json-toolbar span{font-family:'DM Mono',monospace;font-size:12px;color:var(--gray2)}
+.btn-dl{background:transparent;color:var(--violet);border:1px solid rgba(168,85,247,.3);border-radius:4px;padding:5px 14px;font-size:12px;font-family:'DM Mono',monospace;cursor:pointer;transition:all .15s}
+.btn-dl:hover{background:rgba(168,85,247,.1)}
+.json-body{padding:20px;overflow-x:auto}
+.json-body pre{font-family:'DM Mono',monospace;font-size:11px;line-height:1.7;color:#888;max-height:200px;overflow:hidden}
+footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+footer p{font-size:12px;color:var(--gray2);font-family:'DM Mono',monospace}
+@media(max-width:700px){.stats-bar{grid-template-columns:repeat(2,1fr)}.stat-cell:last-child{border-right:none}.content{padding:20px}.header{padding:20px}}
+@media print{body{background:#fff;color:#000}.btn-pdf,.copy-btn,.btn-dl{display:none!important}.header,.card,.strat-card,.json-wrap{background:#f5f5f5!important;border:1px solid #ddd!important}.score-v,.card-score-num,.stat-num,.section-title{color:#6d28d9!important}.opp-box{background:#f5f0ff!important;border-color:#c4b5fd!important;color:#4c1d95!important}.msg-box{background:#f9f9f9!important;border:1px solid #ddd!important;color:#333!important}}
+
+/* ── INTRO ── */
+.intro{max-width:860px;margin:0 auto;padding:44px 40px 40px;border-bottom:1px solid var(--border)}
+.intro-tag{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--violet);margin-bottom:8px}
+.intro-title{font-size:clamp(28px,4vw,44px);font-weight:700;letter-spacing:-.03em;line-height:1.05;margin-bottom:28px}
+.intro-q{font-size:15px;font-weight:700;color:var(--violet);margin-bottom:8px;letter-spacing:-.01em}
+.intro-text{font-size:14px;color:var(--gray1);line-height:1.7;margin-bottom:24px;max-width:700px}
+.intro-benefits{display:flex;flex-direction:column;gap:7px;margin-top:10px}
+.intro-benefit{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--gray1);line-height:1.5}
+.intro-benefit-dot{width:5px;height:5px;border-radius:50%;background:var(--violet);flex-shrink:0;margin-top:8px}
+
+/* ── TOPBAR BRANDING ── */
+.topbar{border-bottom:1px solid var(--border);padding:14px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(10,10,10,0.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:100}
+.topbar-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.topbar-wordmark{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:#fff}
+.topbar-wordmark span{color:#A855F7}
+.topbar-right{display:flex;align-items:center;gap:20px}
+.topbar-badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#555555;background:#111111;border:1px solid #2A2A2A;padding:4px 10px;border-radius:6px}
+.topbar-date{font-family:'DM Mono',monospace;font-size:11px;color:#555555}
+
+/* ── FOOTER BRANDING ── */
+.footer-brand{display:flex;align-items:center;gap:10px}
+.footer-wordmark{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:#555555}
+.footer-wordmark span{color:#A855F7}
+.footer-tagline{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#555555}
+.footer-note{font-family:'DM Mono',monospace;font-size:11px;color:#555555}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="#" class="topbar-logo">
+    <svg width="28" height="28" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="10,10 70,10 90,90 10,90" fill="none" stroke="#2A2A2A" stroke-width="1.5" stroke-linejoin="round"/>
+      <line x1="10" y1="10" x2="10" y2="90" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="10" y1="10" x2="90" y2="90" stroke="#A855F7" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="50" y1="50" x2="70" y2="10" stroke="#A855F7" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="10" cy="10" r="5.5" fill="#A855F7"/>
+      <circle cx="50" cy="50" r="4" fill="#A855F7"/>
+      <circle cx="70" cy="10" r="4" fill="#C084FC"/>
+      <circle cx="90" cy="90" r="5.5" fill="#A855F7"/>
+    </svg>
+    <div class="topbar-wordmark">NOMA<span>DIGITALK</span></div>
+  </a>
+  <div class="topbar-right">
+    <span class="topbar-badge">Prospección de Clientes</span>
+    <span class="topbar-date">mayo 2026 · JD Pro Painting</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="intro">
+  <div class="intro-tag">Automatización · IA</div>
+  <h1 class="intro-title">Prospección de Clientes</h1>
+
+  <p class="intro-q">¿Qué es?</p>
+  <p class="intro-text">
+    Es el proceso de encontrar y organizar potenciales clientes que podrían necesitar tus servicios o productos.<br><br>
+    Sirve para identificar oportunidades de venta más rápido y contactar personas o empresas con mayor probabilidad de convertirse en clientes.
+  </p>
+
+  <p class="intro-q">¿Qué mejora?</p>
+  <div class="intro-benefits">
+    <div class="intro-benefit"><div class="intro-benefit-dot"></div>Más oportunidades comerciales.</div>
+    <div class="intro-benefit"><div class="intro-benefit-dot"></div>Menos tiempo buscando a quién venderle.</div>
+    <div class="intro-benefit"><div class="intro-benefit-dot"></div>Contactos mejor segmentados y más relevantes.</div>
+    <div class="intro-benefit"><div class="intro-benefit-dot"></div>Un proceso de ventas más rápido y eficiente.</div>
+  </div>
+</div>
+
+<div class="header" id="report-top">
+  <div class="header-top">
+    <div>
+      <div class="report-title">Kit de Prospección — Pintura Residencial &amp; Comercial</div>
+      <div class="report-sub">Generadores de demanda · Palm Beach County, FL · Mayo 2026</div>
+    </div>
+    <button class="btn-pdf" onclick="exportPDF()">⬇ Descargar PDF</button>
+  </div>
+  <div class="pills">
+    <span class="pill">📍 West Palm Beach · Jupiter · Wellington · Boynton Beach · Delray Beach · Palm Beach Gardens · Lake Worth</span>
+    <span class="pill">📅 <span>Mayo 2026</span></span>
+    <span class="pill">🔍 <span>100</span> leads verificados</span>
+    <span class="pill">Generado por NOMADIGITALK <span>GROWTH &amp; AUTOMATION STUDIO</span></span>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-cell"><div class="stat-num">42</div><div class="stat-lbl">Oportunidad Alta</div></div>
+  <div class="stat-cell"><div class="stat-num">40</div><div class="stat-lbl">Oportunidad Media</div></div>
+  <div class="stat-cell"><div class="stat-num">18</div><div class="stat-lbl">Oportunidad Baja</div></div>
+  <div class="stat-cell"><div class="stat-num">96</div><div class="stat-lbl">Score máximo</div></div>
+  <div class="stat-cell"><div class="stat-num">7</div><div class="stat-lbl">Ciudades cubiertas</div></div>
+</div>
+
+<div class="content" id="pdf-content">
+
+  <div class="section">
+    <div class="section-title">Tabla de prospectos — ordenada por score</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Empresa</th><th>Tipo</th><th>Ciudad</th><th>Teléfono</th><th>Email</th><th>Web</th><th>RRSS</th><th>Oportunidad</th><th>Score</th></tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Top 20 Prospectos — Análisis Detallado</div>
+    <div class="cards" id="cardsContainer"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Estrategia de acercamiento</div>
+    <div class="strat-grid">
+      <div class="strat-card">
+        <div class="strat-num">01</div>
+        <h4>Administradoras primero — máximo volumen</h4>
+        <p>Seacrest, Florida's PM, KWPMC, Campbell y Vesta gestionan miles de unidades. Un solo contrato de proveedor aprobado puede generar 50–100 trabajos de pintura al año. Son la máxima prioridad.</p>
+      </div>
+      <div class="strat-card">
+        <div class="strat-num">02</div>
+        <h4>Grandes GCs como subcontratista</h4>
+        <p>Verdex, Hedrick Brothers y KAST tienen proyectos multifamily activos. Un GC con proyectos de $10M+ necesita pintores confiables. Proponte como sub con capacidad de escalar.</p>
+      </div>
+      <div class="strat-card">
+        <div class="strat-num">03</div>
+        <h4>Constructores de lujo — Jupiter &amp; Wellington</h4>
+        <p>JMC Luxury Homes, Affinity, First Florida y Build With TCI construyen en el segmento premium. Una relación aquí vale más por proyecto que 10 trabajos residenciales normales.</p>
+      </div>
+      <div class="strat-card">
+        <div class="strat-num">04</div>
+        <h4>Secuencia: Email → Llamada → Follow-up</h4>
+        <p>Leads con email: envía el mensaje personalizado. Espera 3 días. Llama. Si no hay respuesta, un follow-up al día 7. Leads sin email: llama directamente · Martes–Jueves 9–11am.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Datos exportables — CRM / Google Sheets</div>
+    <div class="json-wrap">
+      <div class="json-toolbar">
+        <span>prospectos_pintura_palmbeach_2026.json</span>
+        <button class="btn-dl" onclick="downloadJSON()">⬇ Descargar JSON completo (100 leads)</button>
+      </div>
+      <div class="json-body"><pre id="jsonPreview"></pre></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-brand">
+    <svg width="22" height="22" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="10,10 70,10 90,90 10,90" fill="none" stroke="#2A2A2A" stroke-width="1.5" stroke-linejoin="round"/>
+      <line x1="10" y1="10" x2="10" y2="90" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="10" y1="10" x2="90" y2="90" stroke="#A855F7" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="50" y1="50" x2="70" y2="10" stroke="#A855F7" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="10" cy="10" r="5.5" fill="#A855F7"/>
+      <circle cx="50" cy="50" r="4" fill="#A855F7"/>
+      <circle cx="70" cy="10" r="4" fill="#C084FC"/>
+      <circle cx="90" cy="90" r="5.5" fill="#A855F7"/>
+    </svg>
+    <div>
+      <div class="footer-wordmark">NOMA<span>DIGITALK</span></div>
+      <div class="footer-tagline">Growth &amp; Automation Studio</div>
+    </div>
+  </div>
+  <div class="footer-note">Prospección de Clientes · JD Pro Painting · mayo 2026</div>
+</footer>
+
+<script>
+const leads = [
+  {n:"Seacrest Services",tipo:"HOA / Condo Management",ciudad:"West Palm Beach",tel:"(888) 828-6464",email:"info@seacrestservices.com",web:"seacrestservices.com",rrss:"FB · LinkedIn",op:"ALTA",score:96,
+   opp:"Empresa líder en Palm Beach County con 50+ años y 45,000 residentes bajo gestión. Portfolio masivo de condominios y HOAs en todo el condado. Cada renovación de unidad o área común — lobbies, pasillos, piscinas — genera necesidad de pintura de calidad y contratistas confiables.",
+   msg:"Hi, my name is [YOUR NAME] and I run a professional painting company serving Palm Beach County.\n\nI specialize in interior and exterior painting for property management companies — move-out turnovers, common areas, and planned maintenance cycles. I'd love to introduce our team as a reliable vendor for Seacrest's properties.\n\nDo you have 10 minutes this week?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Verdex Construction",tipo:"Constructora Comercial",ciudad:"West Palm Beach",tel:"(561) 440-1600",email:"info@verdex.com",web:"verdex.com",rrss:"LinkedIn · FB",op:"ALTA",score:95,
+   opp:"Constructora de primer nivel para proyectos multifamily, industriales y senior living activos en WPB. Lic. CGC1519424. Cada proyecto de gran escala requiere pintura interior y exterior en la fase de cierre. Son la empresa referente en South Florida para construcción comercial.",
+   msg:"Hello Verdex team,\n\nI'm [YOUR NAME], a licensed painting contractor specializing in commercial and multifamily projects throughout Palm Beach County.\n\nI'd love to introduce our team as a painting subcontractor for your projects. We're experienced with large-scale jobs, clean trade coordination, and tight schedules. Fully licensed and insured in Florida.\n\nOpen to a brief call this week?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Florida's Property Management",tipo:"Admin. Multifamily",ciudad:"West Palm Beach",tel:"(561) 516-5283",email:"NewLandlords@FloridasPropertyManagement.com",web:"floridaspropertymanagement.com",rrss:"FB · IG",op:"ALTA",score:94,
+   opp:"Gestiona $150M+ en propiedades y más de 1,200 unidades residenciales en Palm Beach County. Especializados en apartamentos clase B/C con alta rotación de inquilinos — cada unidad necesita pintura completa al final de cada contrato de alquiler.",
+   msg:"Hi,\n\nI'm [YOUR NAME], a painting contractor serving West Palm Beach, Lake Worth, Boynton Beach, and surrounding areas.\n\nI work with property managers as a reliable painting sub for turnover units and maintenance. I know your portfolio includes B/C class apartments with high turnover — that's exactly where we can help with fast, clean work at competitive rates.\n\nWould you be open to a quick call?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Home Property Management II",tipo:"Admin. Residencial",ciudad:"West Palm Beach",tel:"(561) 624-4663",email:"broker@624home.com",web:"homepropertymanagement.com",rrss:"FB",op:"ALTA",score:93,
+   opp:"Más de 30 años en Palm Beach County con miles de unidades gestionadas. Administran tanto casas unifamiliares como complejos de apartamentos. Con ese volumen y antigüedad, la demanda de pintura para renovaciones y mantenimiento es constante y recurrente todo el año.",
+   msg:"Hello,\n\nI'm reaching out because Home Property Management II manages a significant portfolio of rental properties in Palm Beach County — and I specialize in painting services for property managers.\n\nWhether it's turnover painting, maintenance jobs, or full unit refreshes, our team is fast, reliable, and fully insured in Florida.\n\nCould we set up a quick call to see if there's a fit?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Hedrick Brothers Construction",tipo:"Constructora Lujo / Comercial",ciudad:"West Palm Beach",tel:"(561) 689-8880",email:"info@hedrickbrothers.com",web:"hedrickbrothers.com",rrss:"LinkedIn · FB · IG",op:"ALTA",score:93,
+   opp:"40+ años construyendo proyectos comerciales de lujo, hoteles y multifamily en Palm Beach County. Su obra terminada exige acabados de pintura de alta calidad. Activos en proyectos de millones de dólares donde la excelencia en el acabado es un requisito, no una opción.",
+   msg:"Hello Hedrick Brothers team,\n\nI'm [YOUR NAME], a licensed painting contractor in Palm Beach County with experience in commercial and luxury residential projects.\n\nYour work on hotels, commercial buildings, and high-end multifamily speaks for itself — we'd like to introduce ourselves as a painting sub that can match that standard. Licensed, insured, and experienced with large-scope jobs.\n\nOpen to a brief call?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"JMC Luxury Homes",tipo:"Constructor Casas Lujo",ciudad:"Jupiter",tel:"—",email:"john@homesbyjmc.com",web:"jmcluxuryhomes.com",rrss:"IG · FB · LinkedIn",op:"ALTA",score:91,
+   opp:"35+ años construyendo casas de lujo en el mercado más exclusivo de Palm Beach County: Jupiter, Palm Beach Gardens y Palm Beach Island. Propiedades de $1M+ donde el acabado de pintura en cada habitación es clave para la entrega final al cliente.",
+   msg:"Hello JMC Luxury Homes,\n\nI'm [YOUR NAME], a painting contractor specializing in high-end residential finishes in Jupiter and Palm Beach County.\n\nYour custom homes are exactly the kind where painting quality shows in every room. We offer precision interior and exterior painting, custom finishes, and we're experienced working on projects at your caliber.\n\nI'd love to connect — would you be open to a brief call?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"KW Property Management (KWPMC)",tipo:"HOA / Condo Lujo",ciudad:"West Palm Beach",tel:"(561) 332-1360",email:"info@kwpmc.com",web:"kwpmc.com",rrss:"LinkedIn · FB",op:"ALTA",score:91,
+   opp:"Más de 20 años especializados en high-rises y comunidades de lujo en Palm Beach County. Su cartera incluye algunos de los edificios más exclusivos del condado. Las áreas comunes y lobbies de lujo requieren repintado periódico con acabados de alta gama.",
+   msg:"Hi,\n\nI'm [YOUR NAME], a painting contractor with experience in luxury condo communities across Palm Beach County.\n\nKWPMC manages some of the most prestigious properties in the area — I'd like to introduce our team for painting services on common areas, hallways, lobbies, and unit turnovers. We're familiar with high-rise protocols and luxury expectations.\n\nCan we schedule 10 minutes?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"KAST Construction",tipo:"Constructora General",ciudad:"West Palm Beach",tel:"(561) 689-2910",email:"info@kastbuild.com",web:"kastbuild.com",rrss:"LinkedIn · FB · IG",op:"ALTA",score:91,
+   opp:"GC full-service con proyectos comerciales y multifamily activos en West Palm Beach. Construyen varios proyectos en paralelo de gran escala, donde la coordinación con subcontratistas de pintura es crítica para el cierre en tiempo y la aprobación final de la obra.",
+   msg:"Hello KAST team,\n\nI'm [YOUR NAME], a painting subcontractor based in Palm Beach County.\n\nI've followed KAST's commercial and multifamily work and would love to introduce our company as a reliable painting sub. We're experienced with large-scale projects, work cleanly alongside other trades, and meet tight deadlines. Fully licensed and insured in Florida.\n\nOpen to a quick call?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"PulteGroup / DiVosta SE Florida",tipo:"Promotora Inmobiliaria",ciudad:"West Palm Beach",tel:"—",email:"SoutheastFlorida@pultegroup.com",web:"pultegroupseflorida.com",rrss:"LinkedIn · FB · IG",op:"ALTA",score:90,
+   opp:"Una de las promotoras más grandes de Palm Beach County con decenas de comunidades activas. DiVosta y Pulte abren nuevas fases constantemente. Cada casa nueva necesita pintura interior completa antes de entrega al comprador y los volúmenes de trabajo son de producción.",
+   msg:"Hello PulteGroup Southeast Florida team,\n\nI'm [YOUR NAME], a painting subcontractor serving Palm Beach County.\n\nWith multiple active communities opening new phases throughout the county, I'd like to introduce our team for painting on new construction homes — interior, exterior, and touch-ups before close. We understand production homebuilding timelines and can scale to meet your schedule.\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Campbell Property Management",tipo:"Admin. HOA / Condo",ciudad:"South FL / Boca Raton",tel:"—",email:"contact@campbellproperty.com",web:"campbellpropertymanagement.com",rrss:"LinkedIn · FB",op:"ALTA",score:89,
+   opp:"70 años en el mercado con cientos de comunidades bajo gestión exclusivamente en South Florida. Su cartera de HOAs y condominios genera demanda constante de mantenimiento de pintura en áreas comunes, edificios exteriores y unidades con cada cambio de residente.",
+   msg:"Hello Campbell Property Management,\n\nI'm [YOUR NAME], a painting contractor serving Palm Beach County and Broward for property management companies.\n\nYour 70-year track record managing HOA and condo communities in South Florida tells me you value reliable vendors. I'd like to be considered for painting services across your portfolio — common areas, exterior maintenance, and unit turnovers.\n\nWould you be open to a call?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Sabatello Companies",tipo:"Constructora General",ciudad:"Palm Beach Gardens",tel:"(561) 626-7600",email:"paul@sabatellocompanies.com",web:"sabatellocompanies.com",rrss:"LinkedIn · FB",op:"ALTA",score:88,
+   opp:"Empresa familiar con 45+ años construyendo en Palm Beach, Martin y St. Lucie Counties. Tres divisiones activas: construcción, desarrollo y servicios ambientales. Sus proyectos residenciales y comerciales requieren pintura como subcontratista de confianza.",
+   msg:"Hi Paul,\n\nI'm [YOUR NAME], a licensed painting contractor based in Palm Beach County.\n\nSabatello's 45+ year presence in the region speaks to the quality of your work. I'd love to introduce our painting team as a sub for your residential and commercial projects. We're reliable, licensed, insured, and experienced working alongside family-owned construction companies.\n\nOpen to a quick chat?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Vesta Property Services",tipo:"Admin. HOA / Condo",ciudad:"Delray Beach",tel:"(561) 245-4440",email:"southeast@vestapropertyservices.com",web:"vestapropertyservices.com",rrss:"FB · LinkedIn",op:"ALTA",score:87,
+   opp:"Gestión de HOAs y condominios en toda Florida con presencia fuerte en West Palm Beach y Delray Beach. Su cartera en Palm Beach County cubre desde comunidades familiares hasta edificios de apartamentos que requieren mantenimiento regular de pintura en zonas comunes.",
+   msg:"Hello Vesta team,\n\nI'm [YOUR NAME], a painting contractor serving Palm Beach and Broward Counties.\n\nI specialize in painting services for property management companies — common areas, building exteriors, hallways, and unit turnovers. I'd love to present our team as a vendor for Vesta's Palm Beach County communities.\n\nWould you be the right person to connect with, or can you point me to your maintenance coordinator?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Jilsa Management",tipo:"Admin. HOA / Condo",ciudad:"West Palm Beach",tel:"—",email:"vendors@jilsamanagement.com",web:"jilsamanagement.com",rrss:"FB · LinkedIn",op:"ALTA",score:87,
+   opp:"Gestión de HOAs en West Palm Beach y Palm Beach Gardens. Administran comunidades residenciales activas que requieren mantenimiento periódico de pintura en exteriores, verjas, áreas comunes y repaints completos según los ciclos de mantenimiento de la comunidad.",
+   msg:"Hello Jilsa Management,\n\nI'm [YOUR NAME], a painting contractor in West Palm Beach specializing in community association properties.\n\nI'd like to introduce our team for painting services across your portfolio — exterior repaints, common areas, gates, and unit turnovers. We work with HOA schedules and board timelines.\n\nCan we schedule a brief call to discuss your vendor needs?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Steve Cury Construction",tipo:"Constructor Lujo",ciudad:"West Palm Beach",tel:"(561) 207-6190",email:"steve@stevecuryconstruction.com",web:"stevecuryconstruction.com",rrss:"IG · FB · YT",op:"ALTA",score:86,
+   opp:"Contacto directo con el dueño. Especializado en casas históricas de Palm Beach Island y renovaciones de condominios — proyectos donde el acabado de pintura es crítico y muy visible para el cliente final. Blog activo con proyectos en curso en 2026.",
+   msg:"Hi Steve,\n\nI'm [YOUR NAME], a professional painting contractor in the Palm Beach area.\n\nYour work on historical homes and condo renovations demands precision — and we specialize in interior and exterior painting for exactly that type of project. Licensed, insured, and known for clean timelines.\n\nAre you currently working with a painting sub? I'd love to connect.\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Build With TCI",tipo:"Constructora Lujo",ciudad:"Wellington",tel:"(561) 208-5561",email:"info@buildwithtci.com",web:"buildwithtci.com",rrss:"IG · LinkedIn · FB",op:"ALTA",score:85,
+   opp:"Constructora de lujo en Wellington — el mercado más exclusivo del área ecuestre de Palm Beach County. Aparición en HGTV. Construyen residencias de altísimo valor donde el acabado de pintura es parte del argumento de venta y el cliente espera perfección.",
+   msg:"Hello Build With TCI,\n\nI'm [YOUR NAME], a painting contractor specializing in high-end residential finishes in Wellington and Palm Beach County.\n\nYour custom homes are the kind where painting quality really shows. We offer meticulous interior and exterior painting with custom finishes, experienced with luxury project timelines and discerning clients.\n\nWould love to introduce ourselves as your go-to painting sub.\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"First Florida Construction",tipo:"Constructor Lujo",ciudad:"Jupiter",tel:"(561) 745-2555",email:"info@firstfloridainc.com",web:"firstfloridaconstruction.com",rrss:"IG · FB",op:"ALTA",score:85,
+   opp:"40+ años construyendo en Palm Beach con sede en Jupiter. Proyectos de lujo de alto valor donde el acabado final es clave para la satisfacción del cliente. Operan 7 días a la semana durante temporada activa — alta demanda de subcontratistas confiables.",
+   msg:"Hello First Florida Construction,\n\nI'm [YOUR NAME], a licensed painting contractor in Jupiter and Palm Beach County.\n\nWith 40+ years of building luxury homes in the area, you know that the painting phase can make or break a project's finish. We specialize in precision interior and exterior painting for high-end builds and work around your timeline.\n\nWould you be open to a quick call this week?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Affinity Construction Group",tipo:"Constructor Lujo",ciudad:"Jupiter",tel:"(561) 744-8881",email:"INFO@AFFINITY-CONSTRUCTION.COM",web:"affinity-construction.com",rrss:"IG · LinkedIn",op:"ALTA",score:85,
+   opp:"Constructor de casas de lujo en Jupiter con proyectos activos en el mercado más premium de Palm Beach County. Tienen email de contacto directo. Sus proyectos personalizados requieren pintores de confianza que entiendan las exigencias del cliente de lujo.",
+   msg:"Hello Affinity Construction,\n\nI'm [YOUR NAME], a painting contractor specializing in luxury residential projects in Jupiter and the northern Palm Beaches.\n\nI came across Affinity's custom home portfolio and would love to introduce our team for the painting phase of your upcoming projects. Licensed, insured, and comfortable with high-end client expectations and project timelines.\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Proctor Construction",tipo:"Constructora General",ciudad:"Palm Beach Gardens",tel:"(561) 630-8544",email:"info@proctorcc.com",web:"proctorcc.com",rrss:"LinkedIn · FB",op:"ALTA",score:83,
+   opp:"Constructora con oficina en Palm Beach Gardens y Port St. Lucie activa en proyectos de South Florida. Proyectos residenciales y comerciales que requieren subcontratistas de pintura confiables para cerrar a tiempo. Buena presencia en el sector GC del norte del condado.",
+   msg:"Hello Proctor Construction,\n\nI'm [YOUR NAME], a painting subcontractor based in Palm Beach County.\n\nI'd like to introduce our team for the painting phase on your projects — interior and exterior, commercial and residential, with a focus on clean work and reliable scheduling.\n\nFully licensed and insured in Florida. Could we schedule 10 minutes to connect?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Harbor Management of South Florida",tipo:"Admin. HOA",ciudad:"Jupiter",tel:"(561) 935-9366",email:"info@harbormanagement.com",web:"—",rrss:"FB",op:"ALTA",score:82,
+   opp:"Administradora de HOAs en Jupiter con email de contacto directo. Jupiter es uno de los mercados más exclusivos de Palm Beach County — sus comunidades de alto valor requieren mantenimiento constante de pintura en exteriores y áreas comunes para mantener la estética premium.",
+   msg:"Hello Harbor Management,\n\nI'm [YOUR NAME], a painting contractor serving Jupiter and the northern Palm Beaches.\n\nI specialize in painting for HOA communities — exterior repaints, common areas, and maintenance cycles that align with your board's calendar and budget.\n\nWould you be the right person to discuss vendor partnerships, or can you connect me with your maintenance coordinator?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Triton Property Management",tipo:"Admin. Residencial",ciudad:"Jupiter",tel:"(561) 250-6565",email:"info@tritonpm.com",web:"—",rrss:"FB",op:"ALTA",score:81,
+   opp:"Administradora residencial en Jupiter con email de contacto disponible. Jupiter tiene el precio medio por pie cuadrado más alto de Palm Beach County. Sus propiedades requieren mantenimiento de pintura de alta calidad para preservar el valor de los inmuebles.",
+   msg:"Hello Triton Property Management,\n\nI'm [YOUR NAME], a painting contractor in Jupiter and Palm Beach County.\n\nI work with property management companies as a reliable painting vendor — turnover units, exterior maintenance, and common areas. I'd love to be added to your approved vendor list.\n\nCan we schedule a quick call this week?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"ASG Facility Maintenance",tipo:"Facility Management",ciudad:"West Palm Beach",tel:"(800) 708-0373",email:"info@asgfm.com",web:"asgfm.com",rrss:"LinkedIn",op:"ALTA",score:80},
+  {n:"Related Group / Related Ross",tipo:"Promotora Comercial",ciudad:"West Palm Beach",tel:"—",email:"mdaves@relatedross.com",web:"relatedross.com",rrss:"LinkedIn · FB · IG",op:"ALTA",score:80},
+  {n:"Mueller Construction",tipo:"Renovación Comercial",ciudad:"Palm Beach Gardens",tel:"(561) 222-6408",email:"info@muellerconstructioncompany.com",web:"muellerconstructioncompany.com",rrss:"FB",op:"ALTA",score:79},
+  {n:"Cushman & Wakefield",tipo:"Gestión Comercial",ciudad:"Palm Beach Gardens",tel:"(407) 949-0800",email:"info@cushmanwakefield.com",web:"cushmanwakefield.com",rrss:"LinkedIn",op:"ALTA",score:78},
+  {n:"NAI / Merin Hunter Codman",tipo:"Gestión Comercial",ciudad:"South Florida",tel:"—",email:"mhc@mhcreal.com",web:"mhcreal.com",rrss:"LinkedIn",op:"ALTA",score:77},
+  {n:"Garcia Stromberg Architecture",tipo:"Arquitectura / Diseño",ciudad:"West Palm Beach",tel:"(561) 478-5855",email:"info@garciastromberg.com",web:"garciastromberg.com",rrss:"LinkedIn · IG",op:"ALTA",score:77},
+  {n:"Capital Realty Advisors",tipo:"Admin. Propiedades",ciudad:"Palm Beach Gardens",tel:"(561) 624-5888",email:"info@capitalrealtyfl.com",web:"—",rrss:"LinkedIn",op:"ALTA",score:76},
+  {n:"Danto Builders",tipo:"Constructora General",ciudad:"West Palm Beach",tel:"(954) 229-2006",email:"info@dantobuilders.com",web:"dantobuilders.com",rrss:"LinkedIn · FB",op:"ALTA",score:76},
+  {n:"Onshore Construction & Development",tipo:"Constructor Lujo",ciudad:"Jupiter",tel:"—",email:"contractor@onshoreconstruction.com",web:"onshorejupiter.com",rrss:"IG · FB",op:"ALTA",score:75},
+  {n:"RPM Sunstate",tipo:"Admin. Propiedades",ciudad:"West Palm Beach",tel:"(877) 373-8404",email:"info@rpmsunstate.com",web:"rpmsunstate.com",rrss:"FB · LinkedIn",op:"ALTA",score:74},
+  {n:"RJM Custom Homes",tipo:"Constructor Lujo",ciudad:"Jupiter / Wellington",tel:"(772) 446-9238",email:"info@rjmhomes.net",web:"rjmhomes.net",rrss:"IG · FB",op:"ALTA",score:73},
+  {n:"Cherry Luxury Homes",tipo:"Constructor Lujo",ciudad:"Jupiter",tel:"(772) 324-8311",email:"info@cherryluxuryhomes.com",web:"cherryluxuryhomes.com",rrss:"IG · FB",op:"ALTA",score:73},
+  {n:"Coastal Custom Builders",tipo:"Constructor Lujo",ciudad:"Palm Beach / Martin County",tel:"—",email:"info@coastalcustombuilders.com",web:"coastalcustombuilders.com",rrss:"IG · FB",op:"ALTA",score:72},
+  {n:"Spina O'Rourke + Partners",tipo:"Arquitectura",ciudad:"West Palm Beach",tel:"(561) 684-6844",email:"info@spinaorourke.com",web:"spinaorourke.com",rrss:"LinkedIn",op:"ALTA",score:72},
+  {n:"Walker Property Services",tipo:"Facility Management",ciudad:"Palm Beach Gardens",tel:"(561) 848-0036",email:"info@wpsgc.com",web:"wpsgc.com",rrss:"LinkedIn",op:"ALTA",score:70},
+  {n:"DCI Builders",tipo:"Constructora General",ciudad:"South Florida",tel:"(561) 275-2406",email:"info@dci-builders.com",web:"dci-builders.com",rrss:"LinkedIn",op:"ALTA",score:69},
+  {n:"Associa Florida",tipo:"Admin. HOA",ciudad:"Palm Beach County",tel:"—",email:"info@associaflorida.com",web:"associaflorida.com",rrss:"LinkedIn · FB",op:"ALTA",score:68},
+  {n:"1M Group",tipo:"Admin. Lujo",ciudad:"West Palm Beach",tel:"(561) 406-2878",email:"INFO@1MGROUP.COM",web:"1mgroup.com",rrss:"LinkedIn",op:"ALTA",score:67},
+  {n:"Marquis Association Management",tipo:"Admin. HOA",ciudad:"Palm Beach County",tel:"—",email:"info@marquishoa.com",web:"marquishoa.com",rrss:"LinkedIn",op:"ALTA",score:67},
+  {n:"McCann Design Group",tipo:"Diseño Interior",ciudad:"West Palm Beach",tel:"(561) 514-0335",email:"sara@mccanndesigngroup.com",web:"mccanndesigngroup.com",rrss:"IG · LinkedIn",op:"MEDIA",score:66},
+  {n:"Wadia Associates",tipo:"Arquitectura",ciudad:"Palm Beach",tel:"(561) 282-9449",email:"info@wadiaassociates.com",web:"wadiaarchitects.com",rrss:"LinkedIn",op:"MEDIA",score:65},
+  {n:"Terri Polimeni Interiors",tipo:"Diseño Interior",ciudad:"Palm Beach Gardens",tel:"(561) 429-6003",email:"info@terripolimeniinteriors.com",web:"terripolimeniinteriors.com",rrss:"IG · FB",op:"MEDIA",score:65},
+  {n:"JLB Renovations",tipo:"Renovación Residencial",ciudad:"West Palm Beach",tel:"(561) 613-5186",email:"JLBRenovationsllc@gmail.com",web:"jlbrenovations.com",rrss:"FB · IG · LinkedIn",op:"MEDIA",score:64},
+  {n:"All County Elite",tipo:"Admin. Propiedades",ciudad:"West Palm Beach",tel:"(561) 506-4646",email:"info@allcountyprop.com",web:"allcountyprop.com",rrss:"FB · LinkedIn",op:"MEDIA",score:64},
+  {n:"Kanga Property Management",tipo:"Admin. Propiedades",ciudad:"Palm Beach County",tel:"(877) 589-3591",email:"info@kangapropertymanagement.com",web:"kangapropertymanagement.com",rrss:"FB",op:"MEDIA",score:63},
+  {n:"RENOVA Delray Beach",tipo:"Renovación Residencial",ciudad:"Delray Beach",tel:"(561) 759-6300",email:"hello@letrenova.com",web:"letrenova.com",rrss:"FB · IG · Houzz",op:"MEDIA",score:62},
+  {n:"REG Architects",tipo:"Arquitectura",ciudad:"West Palm Beach",tel:"—",email:"regadmin@regarchitects.com",web:"regarchitects.com",rrss:"LinkedIn",op:"MEDIA",score:62},
+  {n:"Kellie Burke Interiors",tipo:"Diseño Interior",ciudad:"Palm Beach",tel:"—",email:"Kellie@kellieburke.com",web:"kellieburke.com",rrss:"IG · LinkedIn",op:"MEDIA",score:61},
+  {n:"LS Interiors Group",tipo:"Diseño Interior",ciudad:"Jupiter",tel:"—",email:"info@lsinteriorsgroup.com",web:"lsinteriorsgroup.com",rrss:"IG · FB",op:"MEDIA",score:60},
+  {n:"Wyman Builders",tipo:"Renovación Cocinas / Baños",ciudad:"Deerfield Beach / PBC",tel:"(561) 731-4573",email:"info@wymanbuilders.com",web:"wymanbuilders.com",rrss:"FB · Houzz",op:"MEDIA",score:57},
+  {n:"Loggerhead Construction",tipo:"Renovación Residencial",ciudad:"North Palm Beach",tel:"—",email:"info@loggerhead-construction.com",web:"loggerhead-construction.com",rrss:"FB · Houzz",op:"MEDIA",score:56},
+  {n:"Palm Beach Luxury MGT",tipo:"Admin. Lujo",ciudad:"Palm Beach",tel:"(561) 906-3631",email:"victor@advancedpropertybuilders.com",web:"palmbeachluxurymgt.com",rrss:"—",op:"MEDIA",score:55},
+  {n:"Rogers Design Group",tipo:"Diseño Interior",ciudad:"Jupiter / Palm Beach Gardens",tel:"—",email:"info@rogersdesign.com",web:"rogersdesign.com",rrss:"IG · FB",op:"MEDIA",score:53},
+  {n:"Alexandra Naranjo Designs",tipo:"Diseño Interior",ciudad:"Palm Beach",tel:"—",email:"info@alexandranaranjo.com",web:"alexandranaranjo.com",rrss:"IG · LinkedIn",op:"MEDIA",score:53},
+  {n:"Professional Services Contracting",tipo:"Renovación Comercial",ciudad:"Boynton Beach",tel:"—",email:"nick@professional-services.com",web:"professional-services.com",rrss:"FB · IG · YT",op:"MEDIA",score:52},
+  {n:"Grant Property Management",tipo:"Admin. HOA",ciudad:"Palm Beach",tel:"—",email:"info@grantmgmt.com",web:"grantmgmt.com",rrss:"LinkedIn",op:"MEDIA",score:49},
+  {n:"Debra Juliano Interior Design",tipo:"Diseño Interior",ciudad:"Boca Raton",tel:"(561) 368-6367",email:"info@djidinc.com",web:"djidinc.com",rrss:"IG · Houzz",op:"MEDIA",score:48},
+  {n:"Villa's Construction & Remodeling",tipo:"Renovación Residencial",ciudad:"Lantana",tel:"(561) 374-2866",email:"info@villasconstruction.com",web:"—",rrss:"FB",op:"MEDIA",score:46},
+  {n:"NCCS Construction LLC",tipo:"Renovación",ciudad:"Wellington",tel:"(561) 502-0095",email:"info@nccsconstruction.com",web:"nccsconstruction.com",rrss:"FB",op:"MEDIA",score:45},
+  {n:"Better Builders & Renovators",tipo:"Renovación",ciudad:"Wellington",tel:"(561) 795-0660",email:"info@betterbuilderswellington.com",web:"—",rrss:"FB",op:"BAJA",score:34},,
+  {n:"Kolter Homes",tipo:"Promotora / Constructora Inmobiliaria",ciudad:"Palm Beach County",tel:"(561) 515-4450",email:"information@kolter.com",web:"kolterhomes.com",rrss:"—",op:"ALTA",score:88,
+   opp:"Score 88 · Promotora / Constructora Inmobiliaria en Palm Beach County. Email verificado.",
+   msg:"Hello Kolter Homes team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting subcontractor serving Palm Beach County.\n\nWith multiple active communities across the county, I know painting — both interior and exterior — is a critical path item before close. We specialize in production homebuilding schedules and can scale to meet your volume.\n\nLearn more at jdpropaintingandservices.com — open to an intro call?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Catalfumo Construction",tipo:"Constructora Lujo / Comercial",ciudad:"Palm Beach Gardens",tel:"(561) 694-3000",email:"info@catalfumo.com",web:"catalfumo.com",rrss:"—",op:"ALTA",score:86,
+   opp:"Score 86 · Constructora Lujo / Comercial en Palm Beach Gardens. Email verificado.",
+   msg:"Hello Catalfumo Construction team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in Palm Beach Gardens and Palm Beach County.\n\nYour portfolio of luxury residential and commercial projects in the northern Palms demands finish quality at every phase. I'd like to introduce our team as a reliable painting sub for your active and upcoming projects.\n\nSee our work at jdpropaintingandservices.com — open to a brief call?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"NAI/Merin Hunter Codman",tipo:"Admin. Propiedades Comerciales",ciudad:"Palm Beach Gardens",tel:"(561) 471-8000",email:"mhc@mhcreal.com",web:"mhcreal.com",rrss:"—",op:"ALTA",score:85,
+   opp:"Score 85 · Admin. Propiedades Comerciales en Palm Beach Gardens. Email verificado.",
+   msg:"Hello NAI/Merin Hunter Codman team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in Palm Beach County.\n\nFor commercial property managers overseeing office parks, retail centers, and industrial properties in South Florida, a reliable painting vendor for maintenance and repositioning work is essential.\n\nI'd like to introduce our team for interior and exterior painting across your managed portfolio.\n\nSee our work at jdpropaintingandservices.com — would you be open to a quick call?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Taylor Morrison Florida",tipo:"Promotora / Constructora Inmobiliaria",ciudad:"Palm Beach County",tel:"(480) 840-8100",email:"info@taylormorrison.com",web:"taylormorrison.com",rrss:"—",op:"ALTA",score:85,
+   opp:"Score 85 · Promotora / Constructora Inmobiliaria en Palm Beach County. Email verificado.",
+   msg:"Hello Taylor Morrison Florida team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting subcontractor in Palm Beach County.\n\nWith active communities opening new phases across the county, I'd like to introduce our team for the interior and exterior painting phase before close. We understand production homebuilding schedules and deliver consistently.\n\nSee our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Miller Construction Company",tipo:"Constructora Comercial",ciudad:"West Palm Beach",tel:"—",email:"info@millerconstruction.com",web:"millerconstruction.com",rrss:"—",op:"ALTA",score:84,
+   opp:"Score 84 · Constructora Comercial en West Palm Beach. Email verificado.",
+   msg:"Hello Miller Construction team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a licensed painting contractor in Palm Beach County with experience in commercial projects.\n\nWith 600+ successful projects in West Palm Beach, I'd like to introduce our team as a painting sub for your active builds. Licensed, insured, experienced with commercial timelines.\n\nSee our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Ocean Breeze Community Management",tipo:"Admin. HOA / Condo",ciudad:"Lake Worth Beach",tel:"(561) 770-1052",email:"office@oceanbreezecm.com",web:"oceanbreezecm.com",rrss:"—",op:"ALTA",score:83,
+   opp:"Score 83 · Admin. HOA / Condo en Lake Worth Beach. Email verificado.",
+   msg:"Hello Ocean Breeze Community Management,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in Lake Worth Beach and Palm Beach County.\n\nFor condo and HOA communities in our area, I'd like to introduce our team as a reliable painting vendor — exterior repaints, common areas, hallways, and unit turnovers.\n\nSee our work at jdpropaintingandservices.com — are you the right contact for vendor partnerships?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Moss Construction West Palm Beach",tipo:"Constructora Comercial",ciudad:"West Palm Beach",tel:"(561) 461-6611",email:"info@mosscm.com",web:"moss.com",rrss:"—",op:"ALTA",score:83,
+   opp:"Score 83 · Constructora Comercial en West Palm Beach. Email verificado.",
+   msg:"Hello Moss Construction West Palm Beach,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in Palm Beach County.\n\nWith Moss's reputation for large-scale commercial and multifamily projects in South Florida, I'd like to introduce our team as a painting sub for your active West Palm Beach projects. Licensed, insured, experienced with complex commercial schedules.\n\nSee our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Stiles Corporation",tipo:"Constructora / Promotora Comercial",ciudad:"Fort Lauderdale / South FL",tel:"(954) 627-9300",email:"info@stiles.com",web:"stiles.com",rrss:"—",op:"ALTA",score:82,
+   opp:"Score 82 · Constructora / Promotora Comercial en Fort Lauderdale / South FL. Email verificado.",
+   msg:"Hello Stiles Corporation team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor specializing in commercial and mixed-use projects in South Florida.\n\nWith Stiles' portfolio spanning office, retail, industrial, and multifamily across Palm Beach and Broward, I'd like to introduce our team as a painting sub that delivers quality work on commercial timelines.\n\nSee our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Bainbridge Companies",tipo:"Promotora / Admin. Multifamily",ciudad:"Wellington / Palm Beach County",tel:"(561) 793-6820",email:"info@bainbridgecompanies.com",web:"bainbridgecompanies.com",rrss:"—",op:"ALTA",score:81,
+   opp:"Score 81 · Promotora / Admin. Multifamily en Wellington / Palm Beach County. Email verificado.",
+   msg:"Hello Bainbridge Companies team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in Palm Beach County.\n\nWith your Wellington headquarters and extensive multifamily development and management portfolio, I know painting — new construction phases, turnover units, and common areas — is a constant need.\n\nI'd like to introduce our team as a painting sub and vendor. See our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"IronHorse POA (Campbell Property Mgmt)",tipo:"HOA Comunidad Residencial",ciudad:"West Palm Beach",tel:"(561) 300-1477",email:"IronhorsePM@campbellproperty.com",web:"ironhorsepoa.com",rrss:"—",op:"ALTA",score:80,
+   opp:"Score 80 · HOA Comunidad Residencial en West Palm Beach. Email verificado.",
+   msg:"Hello IronHorse Property Management,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in West Palm Beach.\n\nFor your 324-home community, I'd like to introduce our team as a reliable painting vendor for exterior maintenance, common areas, and community repaints.\n\nSee our work at jdpropaintingandservices.com — would love to be on the approved vendor list.\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Butters Construction & Development",tipo:"Constructora / Promotora Comercial",ciudad:"Boca Raton",tel:"(954) 312-2400",email:"info@butters.com",web:"butters.com",rrss:"—",op:"ALTA",score:80,
+   opp:"Score 80 · Constructora / Promotora Comercial en Boca Raton. Email verificado.",
+   msg:"Hello Butters Construction team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in Boca Raton and Palm Beach County.\n\nFor commercial, industrial, and flex-space construction projects across South Florida, I'd like to introduce our team as a reliable painting sub. Licensed, insured, experienced with commercial timelines.\n\nSee our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"The Beck Group South Florida",tipo:"Constructora Comercial",ciudad:"Fort Lauderdale / Palm Beach",tel:"(754) 799-2235",email:"CarolineVostrejs@beckgroup.com",web:"beckgroup.com",rrss:"—",op:"ALTA",score:79,
+   opp:"Score 79 · Constructora Comercial en Fort Lauderdale / Palm Beach. Email verificado.",
+   msg:"Hello Caroline,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in Palm Beach County and Broward.\n\nThe Beck Group's South Florida portfolio includes major commercial projects where painting quality matters at every stage. I'd like to introduce our team as a painting sub for your active and upcoming projects — licensed, insured, experienced with commercial timelines.\n\nSee our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Benchmark Property Management",tipo:"Admin. HOA / Condo",ciudad:"Coral Springs / Palm Beach County",tel:"(954) 344-5353",email:"joanne@benchmarkpm.com",web:"benchmarkpm.com",rrss:"—",op:"ALTA",score:78,
+   opp:"Score 78 · Admin. HOA / Condo en Coral Springs / Palm Beach County. Email verificado.",
+   msg:"Hello JoAnne,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor serving Palm Beach County and Broward.\n\nWith 100+ community associations under management across South Florida, I know painting — exterior repaints, common areas, and unit maintenance — is a recurring item on your maintenance calendar.\n\nI'd like to be added to Benchmark's approved vendor list. See our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"John Moriarty & Associates Florida",tipo:"Constructora Comercial",ciudad:"Hollywood / South FL",tel:"(954) 920-8550",email:"info@jm-a.com",web:"jm-a.com",rrss:"—",op:"ALTA",score:78,
+   opp:"Score 78 · Constructora Comercial en Hollywood / South FL. Email verificado.",
+   msg:"Hello John Moriarty & Associates team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in Palm Beach County and South Florida.\n\nFor large-scale commercial and mixed-use projects, I'd like to introduce our team as a painting sub. We specialize in commercial timelines, coordination with multiple trades, and quality that meets your client's expectations.\n\nSee our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Thornton Construction Company",tipo:"Constructora Comercial",ciudad:"South Florida",tel:"(305) 649-1995",email:"BD@thornton-inc.com",web:"thornton-inc.com",rrss:"—",op:"ALTA",score:77,
+   opp:"Score 77 · Constructora Comercial en South Florida. Email verificado.",
+   msg:"Hello Thornton Construction team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor serving Palm Beach County and South Florida.\n\nFor commercial and institutional construction projects across the region, I'd like to introduce our team as a painting sub for your active builds — licensed, insured, experienced with complex commercial timelines.\n\nSee our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"SRD Building Corp",tipo:"Constructora Comercial",ciudad:"Boca Raton",tel:"(561) 395-2150",email:"info@srdbuildingcorp.com",web:"srdbuildingcorp.com",rrss:"—",op:"ALTA",score:76,
+   opp:"Score 76 · Constructora Comercial en Boca Raton. Email verificado.",
+   msg:"Hello SRD Building Corp team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in Boca Raton and Palm Beach County.\n\nFor commercial construction and tenant improvement projects in South Florida, I'd like to introduce our team as a reliable painting sub — interior, exterior, on schedule.\n\nSee our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"The Cornerstone Group",tipo:"Promotora Multifamily",ciudad:"Boca Raton / Palm Beach County",tel:"(800) 955-8771",email:"info@cornerstonegrp.com",web:"cornerstonegrp.com",rrss:"—",op:"ALTA",score:75,
+   opp:"Score 75 · Promotora Multifamily en Boca Raton / Palm Beach County. Email verificado.",
+   msg:"Hello Cornerstone Group team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in Palm Beach County.\n\nFor multifamily apartment developments across South Florida, painting — new construction, turnover units, and common area maintenance — is a constant need. I'd like to introduce our team as a reliable painting vendor and sub.\n\nSee our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"GreenPointe Holdings",tipo:"Promotora Inmobiliaria",ciudad:"Florida (statewide)",tel:"(904) 996-2485",email:"info@greenpointellc.com",web:"greenpointellc.com",rrss:"—",op:"ALTA",score:74,
+   opp:"Score 74 · Promotora Inmobiliaria en Florida (statewide). Email verificado.",
+   msg:"Hello GreenPointe Holdings team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting subcontractor in Palm Beach County.\n\nFor residential and mixed-use community developments across Florida, painting is a critical path item in every phase. I'd like to introduce our team for your Palm Beach County and South Florida projects.\n\nSee our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"West Construction Inc",tipo:"Constructora Comercial",ciudad:"Lantana",tel:"(561) 588-2027",email:"info@westconstructioninc.net",web:"westconstructioninc.net",rrss:"—",op:"ALTA",score:74,
+   opp:"Score 74 · Constructora Comercial en Lantana. Email verificado.",
+   msg:"Hello West Construction,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in Lantana and Palm Beach County.\n\nFor commercial construction projects across South Florida, I'd like to introduce our team as a reliable painting sub — fully licensed, insured, experienced with commercial build schedules.\n\nSee our work at jdpropaintingandservices.com — open to a quick call?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Ellemar Enterprises",tipo:"Constructora Comercial",ciudad:"Coconut Creek / South FL",tel:"(954) 603-0500",email:"info@ellemar.com",web:"ellemar.com",rrss:"—",op:"ALTA",score:73,
+   opp:"Score 73 · Constructora Comercial en Coconut Creek / South FL. Email verificado.",
+   msg:"Hello Ellemar Enterprises,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in Palm Beach County and Broward.\n\nFor commercial and healthcare construction projects in South Florida, I'd like to introduce our team as a reliable painting sub — interior, exterior, on schedule, coordinated with your other trades.\n\nSee our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Mill Creek Residential",tipo:"Promotora / Admin. Multifamily",ciudad:"Boca Raton / South FL",tel:"(561) 226-4080",email:"info@millcreekresidential.com",web:"millcreekresidential.com",rrss:"—",op:"ALTA",score:73,
+   opp:"Score 73 · Promotora / Admin. Multifamily en Boca Raton / South FL. Email verificado.",
+   msg:"Hello Mill Creek Residential team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in Boca Raton and Palm Beach County.\n\nFor multifamily apartment development and management across South Florida, painting — new construction phases, turnover units, and common area maintenance — is a constant priority.\n\nI'd like to introduce our team as a reliable painting vendor. See our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Lighthouse Realty Services",tipo:"Admin. Propiedades Comerciales",ciudad:"Palm Beach County",tel:"(561) 628-6683",email:"info@lighthouserealtysvs.com",web:"lighthouserealtysvs.com",rrss:"—",op:"ALTA",score:72,
+   opp:"Score 72 · Admin. Propiedades Comerciales en Palm Beach County. Email verificado.",
+   msg:"Hello Lighthouse Realty Services,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor serving Palm Beach County.\n\nFor commercial property management companies maintaining assets across South Florida, having a trusted painting vendor for maintenance and repositioning work is a must.\n\nLearn more at jdpropaintingandservices.com — would you be open to a quick call?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"GHO Homes",tipo:"Constructor Residencial",ciudad:"Treasure Coast / North Palm Beach",tel:"(772) 873-1710",email:"service@ghohomes.com",web:"ghohomes.com",rrss:"—",op:"ALTA",score:72,
+   opp:"Score 72 · Constructor Residencial en Treasure Coast / North Palm Beach. Email verificado.",
+   msg:"Hello GHO Homes team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor serving the Treasure Coast and northern Palm Beach County.\n\nFor production homebuilding in the $300K–$600K range, having a reliable painting sub who stays on schedule and coordinates well with other trades matters every phase.\n\nSee our work at jdpropaintingandservices.com — open to an intro call?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Terra Group",tipo:"Promotora Lujo / Comercial",ciudad:"Miami / South FL",tel:"(305) 416-4556",email:"jgilg@terragroup.com",web:"terragroup.com",rrss:"—",op:"ALTA",score:72,
+   opp:"Score 72 · Promotora Lujo / Comercial en Miami / South FL. Email verificado.",
+   msg:"Hello Jason,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor serving South Florida.\n\nTerra Group's portfolio of award-winning residential and mixed-use developments requires precision painting at every phase. I'd like to introduce our team as a painting sub for your Palm Beach County and South Florida projects.\n\nSee our work at jdpropaintingandservices.com — open to a quick call?\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"IPM Associa HOA Management",tipo:"Admin. HOA / Condo",ciudad:"Palm Beach / Broward County",tel:"(954) 428-5100",email:"info@ipmhoa.com",web:"ipmhoa.com",rrss:"—",op:"ALTA",score:72,
+   opp:"Score 72 · Admin. HOA / Condo en Palm Beach / Broward County. Email verificado.",
+   msg:"Hello IPM Associa team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor serving South Florida.\n\nWith 200+ community associations under management across Palm Beach and Broward, I know painting maintenance — exterior repaints, common areas, and unit work — is a recurring priority.\n\nI'd like to be added to your approved vendor list. See our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"HomeRiver Group Florida",tipo:"Admin. Propiedades Residenciales",ciudad:"Palm Beach County / Broward",tel:"—",email:"florida@homeriver.com",web:"homeriver.com",rrss:"—",op:"ALTA",score:70,
+   opp:"Score 70 · Admin. Propiedades Residenciales en Palm Beach County / Broward. Email verificado.",
+   msg:"Hello HomeRiver Group Florida,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor serving West Palm Beach, Boca Raton, and Palm Beach County.\n\nAs one of the largest single-family property management networks in the country, I know painting — turnovers, maintenance, and full repaints — is a recurring need across your Florida portfolio.\n\nSee our work at jdpropaintingandservices.com — I'd love to be added to your vendor list.\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Stofft Cooney Architects",tipo:"Arquitectura Lujo",ciudad:"Delray Beach",tel:"(561) 243-0799",email:"info@stofft.com",web:"stofftcooneyarchitecture.com",rrss:"—",op:"ALTA",score:70,
+   opp:"Score 70 · Arquitectura Lujo en Delray Beach. Email verificado.",
+   msg:"Hello Stofft Cooney Architects,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in Delray Beach and Palm Beach County.\n\nYour portfolio of custom luxury homes and estate projects across South Florida demands painting precision that matches your design standard. We specialize in working alongside architects — exact colors, flawless finishes.\n\nSee our work at jdpropaintingandservices.com — would love to connect.\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Peacock + Lewis Architects",tipo:"Arquitectura",ciudad:"North Palm Beach",tel:"(561) 626-9704",email:"info@peacockandlewis.com",web:"peacockandlewis.com",rrss:"—",op:"MEDIA",score:68,
+   opp:"Score 68 · Arquitectura en North Palm Beach. Email verificado.",
+   msg:"Hello Peacock + Lewis team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in Palm Beach County.\n\nFor marina, hospitality, and mixed-use architectural projects in South Florida, the painting phase is where design precision becomes reality. We work alongside architects to deliver finishes that honor the original design intent.\n\nSee our work at jdpropaintingandservices.com — would love to connect.\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Seagate Development Group",tipo:"Constructor Lujo",ciudad:"Fort Myers / South FL",tel:"(239) 738-7900",email:"marketing@seagatedevelopmentgroup.com",web:"seagatedevelopmentgroup.com",rrss:"—",op:"MEDIA",score:68,
+   opp:"Score 68 · Constructor Lujo en Fort Myers / South FL. Email verificado.",
+   msg:"Hello Seagate Development Group,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor specializing in luxury custom homes in South Florida.\n\nFor high-end waterfront and estate projects, painting precision is what makes the final delivery stand out. We specialize in interior and exterior finishes for the luxury market.\n\nSee our work at jdpropaintingandservices.com — would love to connect on Palm Beach County projects.\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Summit Builders of Florida",tipo:"Constructor Lujo",ciudad:"Lighthouse Point / Palm Beach",tel:"(954) 941-8261",email:"info@summitbuildersfl.com",web:"summitbuildersfl.com",rrss:"—",op:"MEDIA",score:68,
+   opp:"Score 68 · Constructor Lujo en Lighthouse Point / Palm Beach. Email verificado.",
+   msg:"Hello Summit Builders of Florida,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor specializing in luxury residential projects in Palm Beach County and Broward.\n\nFor custom luxury homes in the $1M+ range, painting precision is what completes the build. We deliver interior and exterior finishes that match your quality standard.\n\nSee our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Cohen Freedman Encinosa & Associates",tipo:"Arquitectura",ciudad:"Miami Lakes / South FL",tel:"(305) 826-3999",email:"stuc@cfearchitects.com",web:"cfearchitects.com",rrss:"—",op:"MEDIA",score:65,
+   opp:"Score 65 · Arquitectura en Miami Lakes / South FL. Email verificado.",
+   msg:"Hello Stuart,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor serving South Florida.\n\nFor mixed-use, residential, and commercial architecture projects across the region, the painting finish is where design precision shows. We specialize in delivering exact colors and clean execution on project timelines.\n\nSee our work at jdpropaintingandservices.com — would love to connect.\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Fanning Howey Associates Florida",tipo:"Arquitectura Educativa / Institucional",ciudad:"West Palm Beach",tel:"(561) 697-3660",email:"info@fhai.com",web:"fhai.com",rrss:"—",op:"MEDIA",score:65,
+   opp:"Score 65 · Arquitectura Educativa / Institucional en West Palm Beach. Email verificado.",
+   msg:"Hello Fanning Howey team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in West Palm Beach.\n\nFor educational and institutional facility projects in Palm Beach County, painting quality is critical for the environments your buildings serve. We work with architects on precise specs and deliver on institutional timelines.\n\nSee our work at jdpropaintingandservices.com — would love to connect.\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Zyscovich Architects",tipo:"Arquitectura Urbana / Mixta",ciudad:"Miami / South FL",tel:"(305) 372-5222",email:"info@zyscovich.com",web:"zyscovich.com",rrss:"—",op:"MEDIA",score:63,
+   opp:"Score 63 · Arquitectura Urbana / Mixta en Miami / South FL. Email verificado.",
+   msg:"Hello Zyscovich Architects,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in South Florida.\n\nFor mixed-use, urban, and large-scale residential projects across Miami and Palm Beach County, the painting phase requires precision and coordination across complex builds.\n\nSee our work at jdpropaintingandservices.com — would love to be on your contractor list.\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"KZ Architecture",tipo:"Arquitectura",ciudad:"Bay Harbor Islands / South FL",tel:"(305) 865-9911",email:"info@kzarchitecture.com",web:"kzarchitecture.com",rrss:"—",op:"MEDIA",score:62,
+   opp:"Score 62 · Arquitectura en Bay Harbor Islands / South FL. Email verificado.",
+   msg:"Hello KZ Architecture,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in South Florida.\n\nFor luxury residential and hospitality design projects across Miami and Palm Beach County, precise painting execution is what delivers the finished result clients expect.\n\nSee our work at jdpropaintingandservices.com — would love to be on your contractor list.\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Marc-Michaels Interior Design",tipo:"Diseño Interior",ciudad:"Winter Park / Palm Beach",tel:"(407) 629-2124",email:"info@marc-michaels.com",web:"marc-michaels.com",rrss:"—",op:"MEDIA",score:60,
+   opp:"Score 60 · Diseño Interior en Winter Park / Palm Beach. Email verificado.",
+   msg:"Hello Marc-Michaels Interior Design,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in Palm Beach County.\n\nFor luxury residential and model home design projects throughout Florida, precise painting execution brings the design to life. We specialize in following exact color specs and finish schedules that work alongside your installation timelines.\n\nSee our work at jdpropaintingandservices.com — would love to connect on your Palm Beach area projects.\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Arquitectonica",tipo:"Arquitectura Internacional",ciudad:"Miami / South FL",tel:"(305) 372-1812",email:"arquitectonica@arquitectonica.com",web:"arquitectonica.com",rrss:"—",op:"MEDIA",score:60,
+   opp:"Score 60 · Arquitectura Internacional en Miami / South FL. Email verificado.",
+   msg:"Hello Arquitectonica team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in South Florida.\n\nFor landmark residential, mixed-use, and hospitality projects across Miami and Palm Beach County, the painting phase is where architectural vision becomes tangible. We specialize in delivering precision finishes for complex, high-profile projects.\n\nSee our work at jdpropaintingandservices.com — would love to connect.\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Lutgert Construction",tipo:"Constructora / Promotora Comercial",ciudad:"Naples / Palm Beach",tel:"(239) 261-6100",email:"info@lutgertconstruction.com",web:"lutgertconstruction.com",rrss:"—",op:"MEDIA",score:60,
+   opp:"Score 60 · Constructora / Promotora Comercial en Naples / Palm Beach. Email verificado.",
+   msg:"Hello Lutgert Construction team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in Palm Beach County.\n\nFor commercial and luxury residential construction projects across South Florida, I'd like to introduce our team as a reliable painting sub.\n\nSee our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Interiors by Steven G",tipo:"Diseño Interior",ciudad:"Pompano Beach / South FL",tel:"(954) 735-8223",email:"info@interiorsbysteveng.com",web:"interiorsbysteveng.com",rrss:"—",op:"MEDIA",score:58,
+   opp:"Score 58 · Diseño Interior en Pompano Beach / South FL. Email verificado.",
+   msg:"Hello Interiors by Steven G,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in South Florida.\n\nFor luxury residential interior design projects, the painting execution is what makes the vision real. We specialize in precision painting that follows your color and finish specifications exactly.\n\nSee our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Britto Charette Interiors",tipo:"Diseño Interior",ciudad:"Miami / Palm Beach County",tel:"(305) 640-5005",email:"contact@brittocharette.com",web:"brittocharette.com",rrss:"—",op:"MEDIA",score:55,
+   opp:"Score 55 · Diseño Interior en Miami / Palm Beach County. Email verificado.",
+   msg:"Hello Britto Charette team,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor serving South Florida.\n\nFor hospitality and high-end residential design projects in Palm Beach County and Broward, precision painting is what delivers the finished result your clients expect. We specialize in working alongside design teams — exact colors, clean execution, minimal disruption.\n\nSee our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Perla Lichi Design",tipo:"Diseño Interior",ciudad:"Coral Springs / South FL",tel:"(954) 726-0899",email:"info@perlalichi.com",web:"perlalichi.com",rrss:"—",op:"MEDIA",score:52,
+   opp:"Score 52 · Diseño Interior en Coral Springs / South FL. Email verificado.",
+   msg:"Hello Perla Lichi Design,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor serving South Florida.\n\nFor luxury residential and model home design projects, precise painting execution is essential. We work alongside designers to deliver exact finishes on schedule.\n\nSee our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"},
+  {n:"Michael Wolk Design",tipo:"Diseño Interior",ciudad:"Miami / South FL",tel:"(305) 576-2898",email:"contact@wolkdesign.com",web:"michaelwolkdesign.com",rrss:"—",op:"MEDIA",score:50,
+   opp:"Score 50 · Diseño Interior en Miami / South FL. Email verificado.",
+   msg:"Hello Michael Wolk Design,\n\nI'm [YOUR NAME] from JD Pro Painting & Services, a painting contractor in South Florida.\n\nFor high-end residential and hospitality design projects, the painting finish brings the design to life. We specialize in precision painting that matches your vision — exact colors, clean execution.\n\nSee our work at jdpropaintingandservices.com\n\n— [YOUR NAME] | [YOUR PHONE]"}
+];
+
+// ─── TABLE ────────────────────────────────────────────────────────────────────
+const tbody = document.getElementById('tableBody');
+leads.forEach((l,i)=>{
+  const badgeClass = l.op==='ALTA'?'b-alta':l.op==='MEDIA'?'b-media':'b-baja';
+  const scoreClass = l.op==='ALTA'?'score-v':'score-m';
+  const webLink = l.web&&l.web!=='—'?`<a href="https://${l.web}" target="_blank">${l.web}</a>`:'<span style="color:var(--gray2)">—</span>';
+  tbody.innerHTML += `<tr>
+    <td><span class="mono">${String(i+1).padStart(2,'0')}</span></td>
+    <td><div class="co-name">${l.n}</div></td>
+    <td><span class="badge b-tipo">${l.tipo}</span></td>
+    <td class="mono">${l.ciudad}</td>
+    <td class="mono">${l.tel}</td>
+    <td class="mono" style="font-size:10px">${l.email}</td>
+    <td class="co-web">${webLink}</td>
+    <td style="font-size:11px;color:var(--gray1)">${l.rrss}</td>
+    <td><span class="badge ${badgeClass}">${l.op}</span></td>
+    <td><span class="${scoreClass}">${l.score}</span></td>
+  </tr>`;
+});
+
+// ─── TOP 20 CARDS ─────────────────────────────────────────────────────────────
+const container = document.getElementById('cardsContainer');
+leads.slice(0,20).forEach((l,i)=>{
+  const isTop = l.score>=85;
+  const barClass = isTop?'card-bar':'card-bar-b';
+  const scoreClass = isTop?'card-score-num':'card-score-num-b';
+  const tags = buildTags(l);
+  container.innerHTML += `
+  <div class="card">
+    <div class="${barClass}"></div>
+    <div class="card-head">
+      <div>
+        <div class="card-name">${l.n}</div>
+        <div class="card-city">📍 ${l.ciudad}, FL · ${l.tipo}</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div class="${scoreClass}">${l.score}</div>
+        <div class="card-score-lbl">Score</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-grid">
+        <div><div class="cg-k">Teléfono</div><div class="cg-v">${l.tel}</div></div>
+        <div><div class="cg-k">Email</div><div class="cg-v" style="font-size:10px">${l.email}</div></div>
+        <div><div class="cg-k">Web</div><div class="cg-v" style="font-size:10px">${l.web}</div></div>
+        <div><div class="cg-k">RRSS</div><div class="cg-v" style="font-size:10px">${l.rrss}</div></div>
+      </div>
+      ${tags}
+      <div class="opp-lbl">Oportunidad</div>
+      <div class="opp-box"><strong>${l.op}</strong> — ${l.opp||''}</div>
+      <div class="msg-lbl">Cold Contact Message (English)</div>
+      <div class="msg-box"><button class="copy-btn" onclick="copyMsg(this)">Copy</button>${l.msg||''}</div>
+    </div>
+  </div>`;
+});
+
+function buildTags(l){
+  let tags='<div class="tags">';
+  if(l.email&&l.email!=='—') tags+=`<span class="tag tag-g">✓ Email directo</span>`;
+  if(l.score>=85) tags+=`<span class="tag tag-g">✓ Prioridad máxima</span>`;
+  if(l.rrss&&l.rrss!=='—'&&l.rrss.includes('IG')) tags+=`<span class="tag">Instagram activo</span>`;
+  if(l.tipo.includes('HOA')||l.tipo.includes('Admin')) tags+=`<span class="tag tag-g">✓ Gestor de volumen</span>`;
+  if(l.tipo.includes('Lujo')||l.tipo.includes('lujo')) tags+=`<span class="tag tag-g">✓ Segmento premium</span>`;
+  if(l.tel==='—') tags+=`<span class="tag tag-y">⚠ Sin teléfono visible</span>`;
+  if(l.email==='—'&&l.tel==='—') tags+=`<span class="tag tag-y">⚠ Contactar por web</span>`;
+  tags+='</div>';
+  return tags;
+}
+
+// ─── JSON PREVIEW ─────────────────────────────────────────────────────────────
+const jsonData = leads.map(l=>({
+  nombre:l.n, tipo:l.tipo, ciudad:l.ciudad, estado:"FL",
+  telefono:l.tel, email:l.email, web:l.web==='—'?null:`https://${l.web}`,
+  rrss:l.rrss, oportunidad:l.op, score:l.score,
+  estado_prospecto:"Por contactar"
+}));
+document.getElementById('jsonPreview').textContent = JSON.stringify(jsonData.slice(0,5),null,2)+'…';
+
+// ─── UTILS ────────────────────────────────────────────────────────────────────
+function copyMsg(btn){
+  const txt = btn.parentElement.innerText.replace('Copy','').trim();
+  navigator.clipboard.writeText(txt).then(()=>{
+    btn.textContent='✓ Copied';
+    setTimeout(()=>btn.textContent='Copy',2000);
+  });
+}
+function downloadJSON(){
+  const blob=new Blob([JSON.stringify(jsonData,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='prospectos_pintura_palmbeach_2026.json';
+  a.click();
+}
+function exportPDF(){
+  const btn=document.querySelector('.btn-pdf');
+  btn.textContent='Generando PDF...';
+  btn.disabled=true;
+  const opt={
+    margin:[8,8,8,8],
+    filename:'prospectos-pintura-palmbeach-2026.pdf',
+    image:{type:'jpeg',quality:.95},
+    html2canvas:{scale:1.5,useCORS:true,backgroundColor:'#0A0A0A'},
+    jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
+    pagebreak:{mode:['avoid-all','css','legacy']}
+  };
+  html2pdf().set(opt).from(document.body).save().then(()=>{
+    btn.textContent='⬇ Descargar PDF';
+    btn.disabled=false;
+  });
+}
+</script>
+</body>
+</html>
